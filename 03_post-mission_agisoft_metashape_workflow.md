@@ -70,7 +70,7 @@ This document is a working guide for post-processing UAS field missions using th
     - Both the pointcloud and the DEM
 
 
-####Notes and other references
+#### Notes and other references
 At least 8 or so markers
 GSD 1/3 of accuracy you need
 
