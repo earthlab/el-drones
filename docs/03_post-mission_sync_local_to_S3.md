@@ -16,4 +16,5 @@ This is a workflow for syncing local storage with AWS S3 bucket storage. This is
 5. Sync data from S3 bucket to your local drive
     - Type `aws s3 sync <source_path> <target_path>` 
     - e.g., `aws s3 sync s3://wogwogrep4 D:\`
+    - Data successfully transfers if moved from one folder path to another. Not successful for me (AIS) when I try transferring a file path
     - Data download!
