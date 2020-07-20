@@ -9,5 +9,6 @@ Here is a table to track of our currency date requirements for each aircraft typ
 | ---------------- | --------------------- | ------------------------- | ------------------------------------- |
 | Victoria Scholl  | DJI Mavic / Phantom   | Tuesday, Jan 21, 2020     | Monday, April 20, 2020                |
 | Anna Spiers      | DJI Mavic / Phantom   | Tuesday, Jan 21, 2020     | Monday, April 20, 2020                |
-| Joe McGlinchy    | DJI M600 Pro          | Tuesday, Jan 21, 2020     | Monday, April 20, 2020                |
+| Joe McGlinchy    | DJI Mavic / Phantom   | Thursday, July 2, 2020    | Wednesday, September 30, 2020         |
+| Joe McGlinchy    | DJI M600 Pro          | Friday, July 17, 2020     | Thursday, October 15, 2020            |
 | First Last       | Make Model            | Day Name, Month, DD, YYYY | Day Name, Month, DD, YYYY             |
