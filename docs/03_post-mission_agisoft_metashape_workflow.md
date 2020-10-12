@@ -43,15 +43,13 @@ This document is a working guide for post-processing UAS field missions using th
 13. Adjust bounding box
 14. Optimize Cameras (tools ->) to improve alignment accuracy  
     - Check all but bottom left one (Fit k4) when using DJI imagery. Don’t check advanced (Adaptive camera model fitting and est tie point covariance)  
-    - Agisoft’s description of through correspondence (AIS): Optimize cameras - you refine the camera calibration parameter values based on the calculated values after the images are aligned.   
-15. Build Dense point cloud (workflow ->)   
+    - Agisoft’s description of through correspondence (AIS): Optimize cameras - you refine the camera calibration parameter values based on the calculated values after the images are aligned.    
+15. Build Dense point cloud (workflow ->)    
     - High or Medium quality (higher quality more accurate but increase processing time), aggressive depth filtering, check box for calculate point colors)  
     - If depth maps already exist, you can reuse these maps in the dense point cloud generation by selecting “Reuse depth maps” in the dense point cloud build window.  
-
-(Optional: Build Mesh from dense cloud and Texture)
-16. Build mesh (not needed if you just want a DEM and/or orthophotograph)
-17. Build texture (not needed if you just want a DEM and/or orthophotograph)
-18. Build DEM from dense cloud (workflow ->)  
+16. Build mesh (not needed if you just want a DEM and/or orthophotograph)  
+17. Build texture (not needed if you just want a DEM and/or orthophotograph)  
+18. Build DEM from dense cloud (workflow ->)   
     - For orthomosaic generation – faster than mesh (but mesh may be required for complex terrain)  
     - Geographic type, check that it’s correct projection  
     - Source data: dense cloud  
