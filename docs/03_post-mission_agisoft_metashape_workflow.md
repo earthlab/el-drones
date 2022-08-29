@@ -5,26 +5,27 @@ This document is a working guide for post-processing UAS field missions using th
 2. Set preferences (MetashapePro -> preferences)  
     - -> GPU-> Check box for GPU if there is one available, check box for Use CPU when performing…)  
 3. Import photos (Workflow menu in top toolbar -> add photos (or folder))   
-    - Select single (e.g., Phantom4Pro camera) or multi-camera system (e.g., Kernel cam).  
+    - Select single (e.g., Phantom4Pro camera) or multi-camera system (e.g., Kernel camera (Micasense)).  
     - Import all photos, including reflectance cal target photos (have to repeat this if images are in separate folders)  
     - Note: Cal photos need to go in a separate folder for calibration images in the Workspace pane. They may be automatically detected at import (if noted in metadata), automatically detected at the next step, or manually moved later. 
 4. Clean up photos 
     - Manually remove outlier photos (e.g.,  taken during take-off) in Model workspace
     - Check camera calibration (from EXIF files) (tools-> Camera calibration) exiftool  
-5. Convert GPS coordinates of your geotagged images to match the coordinate system of your ground control points (GCPs) which will be imported later.  Verify coordinate system of imagery by clicking on chunk in Workspace pane and looking in bottom left corner.
+5. Convert GPS coordinates of your geotagged images to match the coordinate system of your ground control points (GCPs) which will be imported later. Use the "convert" tab under "Reference" and select the coordinate system from the "coordinate System" under "Convert Reference" dialog box. Verify coordinate system of imagery by clicking on chunk in Workspace pane and looking in bottom left corner.
     - Phantom 4 imagery is in WGS84 (EPSG::4326) by default
     - Phantom 4 vertical height is notoriously imprecise. Use relative rather than absolute camera height. Follow instructions in [this link](https://agisoft.freshdesk.com/support/solutions/articles/31000152491-working-with-dji-photos-altitude-problem-) to use DJI relative height and then add take-off height.
     - See [this link](http://www.agisoft.com/forum/index.php?topic=4986.msg38769#msg38769) for trouble-shooting vertical height with a Phantom 4.  
 6. Estimate image quality  
     - In Photos workspace, change view to detailed > select all photos > right-click > Estimate Image Quality... 
-    - Disable all images that have an image quality below 0.7-0.85  
+    - Disable all images that have an image quality below 0.7  
 7. If reflectance panel -> Run reflectance calibration  
     - Tools-> Calibrate reflectance-> Locate panels  
     - Input calibration data for panel as a CSV, or manually  
-    - Check on “Use reflectance panels” and “Use sun sensor” options in the Calibrate Reflectance dialog to perform calibration based on panel data and/or image meta information. Click OK to start the calibration process  
+    - Check on “Use reflectance panels” and “Use sun sensor” (if had a sun sensor) options in the Calibrate Reflectance dialog to perform calibration based on panel data and/or image meta information. Click OK to start the calibration process  
 8. Generate masks if necesary (for example, if you don't want to include cars or other moving objects)
 9. Align photos (workflow->) same as generating sparse point cloud  
     - High accuracy, generic preselection, reference preselection, key and tie point limits to default (40,000 and 4,000 respectively) Adaptive model fitting – yes Apply masks if using a mask  
+    - Can experiment the best key and tie point limits for the project. Some projects use (40,000 and 10,000 respectively) or (40,000 and no value for tie point limit (aka unlimited) respectively)
 10. GCPs  
     - Add Markers (3rd icon from left in Workspace toolbar, 1st icon from left in Reference toolbar)  
     - Specify accuracy for markers
@@ -34,7 +35,7 @@ This document is a working guide for post-processing UAS field missions using th
     - Verify and link markers to images
         - Right click on GCP -> filter by markers
         - View-> photos. Double click each photo
-        - Make sure marker is in correct place. Mark each GCP in 3-6 images (right click -> Place markers - > click correct marker)
+        - Make sure marker is in correct place. If not move the marker to the correct place. repeat this process for each GCP in 3-6 images (right click -> Place markers - > click correct marker)
         - Do for all GCPs (or 4-5 at least)  
     - Update  
         - Agisoft’s description through correspondence (AIS): Update - after adjusting marker locations on the photos, you recalculate the coordinates and calculate errors given the position of the GCP.  
