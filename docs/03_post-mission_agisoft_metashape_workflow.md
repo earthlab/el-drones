@@ -38,7 +38,7 @@ This document is a working guide for post-processing UAS field missions using th
         - Make sure marker is in correct place. If not move the marker to the correct place. repeat this process for each GCP in 3-6 images (right click -> Place markers - > click correct marker)
         - Do for all GCPs (or 4-5 at least)  
     - Update  
-        - Agisoft’s description through correspondence (AIS): Update - after adjusting marker locations on the photos, you recalculate the coordinates and calculate errors given the position of the GCP.  
+        - Agisoft’s description through correspondence (AIS): Update - after adjusting marker locations on the photos, you recalculate the coordinates and calculate errors given the position of the GCP.  (Reference pane, sixth button in from the left, 'Update Transform')
 11. Assuming that you have a sufficient number (~8 or more)  of high accuracy ground control points, uncheck all images in the reference pane and also uncheck a few GCPs (20 to 30%) in order to use them as check points instead of control points. This will give you a better measure of the 'real accuracy' of your dataset. Note that the layout/distribution of GCPs is very important. If you have been able to correct the EXIF altitude information for all your cameras, then you do not have to uncheck the cameras in the reference pane. They can be used as reference as long as the right camera accuracy settings (leave default 10m) have been chosen.
 12. Clean sparse point cloud (Model > GRADUAL SELECTION). Remove all points with high reprojection error (choose a value below 1, I suggest to use 0.5-0.8 ) and high reconstruction uncertainty (try to find the 'natural threshold' by moving the slider).
 13. Adjust bounding box
