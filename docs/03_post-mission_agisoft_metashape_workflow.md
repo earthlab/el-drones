@@ -34,7 +34,7 @@ This document is a working guide for post-processing UAS field missions using th
     - Yes to all for creating markers. Click on flag icon in top toolbar to make them appear  
     - Verify and link markers to images
         - Right click on GCP -> filter by markers
-        - View-> photos. Double click each photo
+        - View-> photos. Double click each photo. If using a non-RGB sensor, such as a MicaSense RedEdge, your photos may appear completely dark. If so, go to: Tools -> Set Brightness -> Estimate (or adjust manually) -> Apply
         - Make sure marker is in correct place. If not move the marker to the correct place. repeat this process for each GCP in 3-6 images (right click -> Place markers - > click correct marker)
         - Do for all GCPs (or 4-5 at least)  
     - Update  
