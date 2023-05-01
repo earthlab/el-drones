@@ -23,6 +23,7 @@ This document is a working guide for post-processing UAS field missions for fore
     - Tools-> Calibrate reflectance-> Locate panels  
     - Input calibration data for panel as a CSV, or manually  
     - Check on “Use reflectance panels” and “Use sun sensor” (if had a sun sensor & using data) options in the Calibrate Reflectance dialog to perform calibration based on panel data and/or image meta information. Click OK to start the calibration process  
+    - Please refer [this page](https://support.micasense.com/hc/en-us/articles/115000765514-Use-of-Calibrated-Reflectance-Panels-For-MicaSense-Data) for more information on calibration panel and [this page](https://agisoft.freshdesk.com/support/solutions/articles/31000148780-micasense-rededge-mx-processing-workflow-including-reflectance-calibration-in-agisoft-metashape-pro#Appendix-C.-Controlling-reflectance-calculation) for calibration process.
 8. Generate masks if necesary (for example, if you don't want to include cars or other moving objects)
 9. Align photos (workflow->) same as generating sparse point cloud  
     - High accuracy, generic preselection, reference preselection, key and tie point limits to default (40,000 and 4,000 respectively) Adaptive model fitting – yes Apply masks if using a mask  
