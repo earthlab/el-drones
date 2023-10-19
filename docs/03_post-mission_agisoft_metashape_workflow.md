@@ -90,7 +90,7 @@ This document is a working guide for post-processing UAS field missions for fore
     - Activate 'Chunk 1' again
     - In the menu, go to "Tools" and then under "DEM" select 'Transform DEM..."
         - Click 'Calculate difference'
-        - In the dropdown menu, select your DTM from the list (it should be named 'DTM' under the chunk called 'DTM Chunk'
+        - In the dropdown menu, select your DTM from the list (it should be named 'DTM' under the chunk called 'DTM Chunk')
         - Click 'OK'
         - You will be asked if you want to replace the default DEM - CLICK 'NO'!
         - A second DEM will appear under the first one. Rename it to 'Canopy Height'
@@ -106,11 +106,11 @@ This document is a working guide for post-processing UAS field missions for fore
 27.	Export results to the 'Outputs' folder for your project
     - Make Chunk 1 active
         - Right click on the Dense Cloud and 'Export Dense Cloud...' Export the points with the appropriate name and then '_POINTCLOUD'
-        - Right click on the DEM and 'Export DEM...' Export the DEM with the appropriate name and then '_DEM'
-        - Right click on the orthomosaic and 'Export Orthomosaic...' Export the orthomosaic with the appropriate name and then '_ORTHO'
-        - Right click on the Canopy Height layer and 'Export DEM...' Export the Canopy Height with the appropriate name and then "_CANOPYHEIGHT"
+        - Right click on the DEM and 'Export DEM...' Export the DEM with the appropriate name and then '_DEM'. If you have a shapefile boundary loaded up (see above), make sure that you have 'Clip to boundary shapes' selected.
+        - Right click on the orthomosaic and 'Export Orthomosaic...' Export the orthomosaic with the appropriate name and then '_ORTHO'. If you have a shapefile boundary loaded up (see above), make sure that you have 'Clip to boundary shapes' selected.
+        - Right click on the Canopy Height layer and 'Export DEM...' Export the Canopy Height with the appropriate name and then "_CANOPYHEIGHT". If you have a shapefile boundary loaded up (see above), make sure that you have 'Clip to boundary shapes' selected.
     - Make DTM chunk active
-        - Right click on the DTM and 'Export DEM...' Export the DTM with the appropriate name and then -DTM
+        - Right click on the DTM and 'Export DEM...' Export the DTM with the appropriate name and then -DTM. If you have a shapefile boundary loaded up (see above), make sure that you have 'Clip to boundary shapes' selected.
 28. Generate the processing report
     - File -> Export -> Generate Report
     - Keep all defaults, but re-name it to the appropriate name and then "_report". Click 'ok'
