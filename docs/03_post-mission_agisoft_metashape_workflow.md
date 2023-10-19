@@ -102,7 +102,7 @@ This document is a working guide for post-processing UAS field missions for fore
     - Click this white boundary; it should turn red-ish.
     - Right click and then 'Set boundary type...' -> 'Outer boundary'
     - Click on your ortho to make the boundary white again - it should now have black dashes in it
-    - Your exports of all DEM and ortho layers should export as clipped by this boundary
+    - Your exports of all DEM and ortho layers should export as clipped by this boundary; when you export something, you can select/de-select 'Clip to boundary shapes'
 27.	Export results to the 'Outputs' folder for your project
     - Make Chunk 1 active
         - Right click on the Dense Cloud and 'Export Dense Cloud...' Export the points with the appropriate name and then '_POINTCLOUD'
