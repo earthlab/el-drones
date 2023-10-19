@@ -65,9 +65,57 @@ This document is a working guide for post-processing UAS field missions for fore
     - Check pixel size (can check meters button)
 20.	If calculating indices -> Calculate required index information
     - Tools-> set raster transformation-> transform tab
-21. Classify ground points (takes a long time)
-22.	Export results (file->export)
-    - Both the pointcloud and the DEM
+21. Create a Digital Terrain Model (DTM)
+    - First, create a copy of your chunk (Metashape only allows one file of each type per chunk, meaning that the DEMs will overwrite one another if this process is all done in a single chunk)
+          - In your workspace, right click on 'Chunk 1' and then 'Duplicate...'
+          - De-select everything exept for 'Dense Clouds' and then complete the process
+          - You should now have a 'Copy of chunk 1' in your workspace. Right click on it and rename it to 'DTM Chunk'. Make this copied chunk active by either double-clicking on it, or right-clicking on it and selecting 'Set active' from the menu. The name should become bold.
+    - Classify ground points
+        - With this new chunk active, select 'Tools' from the menu. Under 'Dense Cloud', select 'Classify Ground Points.' [This page provides a good overview of the parameters for this tool and what it is doing.](https://agisoft.freshdesk.com/support/solutions/articles/31000160729-parameters-for-ground-point-classification#:~:text=For%20nearly%20flat%20terrain%20it,the%20terrain%20contains%20steep%20slopes.)
+        - Leave the 'Classes' parameters as default
+        - Under Parameters you will want: Max angle = 15, Max distance = 1, Cell size = 30 OR 50 (50 if there is a lot of dense vegetation), Erosion radius = 0. While these parameters aren't optimized for each location, they should be good enough for basic canopy height calculations. Click 'OK'
+    - Build a Mesh from your new classified ground points
+        - Now go to 'Workflow' and 'Build Mesh...'
+        - Leave the general defaults. Under 'Advanced' click 'Select' next to where it says 'Point classes: All'
+        - De-select the point classes until ONLY 'Ground' is still checked. Click 'OK'
+        - Click 'Ok' - the Mesh will process, which may take a moment
+        - You should now have a 3D model under 'DTM Chunk'
+    - Create a DTM from the new mesh
+        - Click 'Workflow' in the menu, and then 'Build DEM...'
+        - Change your 'Source data:' to 'Mesh' to use the new mesh you've created
+        - Click 'Ok' - the DEM will process, which may take a moment
+        - You should now have a DEM under 'DTM Chunk'
+        - Right click on the new DEM and rename it to 'DTM'
+23. Create a canopy height model from the original DEM and the DTM
+    - Activate 'Chunk 1' again
+    - In the menu, go to "Tools" and then under "DEM" select 'Transform DEM..."
+        - Click 'Calculate difference'
+        - In the dropdown menu, select your DTM from the list (it should be named 'DTM' under the chunk called 'DTM Chunk'
+        - Click 'OK'
+        - You will be asked if you want to replace the default DEM - CLICK 'NO'!
+        - A second DEM will appear under the first one. Rename it to 'Canopy Height'
+25. Load a shapefile to set as the export boundary for the project
+    - File -> Import -> Import Shapes...
+    - Your project should have a 'Metadata' folder in its file structure. Open the folder and select the .shp file that ends in '-boundary'
+    - Under Chunk 1 you should now see a 'Shapes' folder with 'Layer' in it (probably '1 polygon')
+    - Click on the 'Ortho' tab of your processing space. You should see a white boundary
+    - Click this white boundary; it should turn red-ish.
+    - Right click and then 'Set boundary type...' -> 'Outer boundary'
+    - Click on your ortho to make the boundary white again - it should now have black dashes in it
+    - Your exports of all DEM and ortho layers should export as clipped by this boundary
+27.	Export results to the 'Outputs' folder for your project
+    - Make Chunk 1 active
+        - Right click on the Dense Cloud and 'Export Dense Cloud...' Export the points with the appropriate name and then '_POINTCLOUD'
+        - Right click on the DEM and 'Export DEM...' Export the DEM with the appropriate name and then '_DEM'
+        - Right click on the orthomosaic and 'Export Orthomosaic...' Export the orthomosaic with the appropriate name and then '_ORTHO'
+        - Right click on the Canopy Height layer and 'Export DEM...' Export the Canopy Height with the appropriate name and then "_CANOPYHEIGHT"
+    - Make DTM chunk active
+        - Right click on the DTM and 'Export DEM...' Export the DTM with the appropriate name and then -DTM
+28. Generate the processing report
+    - File -> Export -> Generate Report
+    - Keep all defaults, but re-name it to the appropriate name and then "_report". Click 'ok'
+    - Make sure it exports in the 'Outputs' folder for your project with the right name
+
 
 
 #### Notes and other references
