@@ -1,7 +1,9 @@
 This document is a working guide for post-processing UAS field missions for forest ecological applications. These instructions are built off of a guide posted in this [Agisoft forum post](https://www.agisoft.com/forum/index.php?topic=7851.0). Also see Megan Cattau's [UASWorkflows repo](https://github.com/mcattau/UASWorkflows)
 
 0. If you are operating on CU Boulder research computing resources, before the FIRST time you ever use Metashape, run this line of code from the terminal:
-    echo "umask 0000" >> ~/.metashape
+
+   echo "umask 0000" >> ~/.metashape
+   
    This will ensure that all of your Metashape files and directories have open permissions (the default settings are a pain)
 2. Open Metashape and save project in a sensible place (File -> save)  
 3. Set preferences (MetashapePro -> preferences)  
