@@ -100,7 +100,8 @@ This document is a working guide for post-processing UAS field missions for fore
         - A second DEM will appear under the first one. Rename it to 'Canopy Height'
 25. Load a shapefile to set as the export boundary for the project
     - File -> Import -> Import Shapes...
-    - Your project should have a 'Metadata' folder in its file structure. Open the folder and select the .shp file that ends in '-boundary'
+    - Your project should have a 'Metadata' folder in its file structure. Open the folder and select the .shp file that starts with 'UsableArea...'
+    - It will ask you for the projection - is should default to what your project already is (you converted coordinates in Step 6). Note that to make this work the shapefile .prj file has been DELETED from the directories to prompt this dialogue box. For some reason Metashape doesn't want to read the .prj files correctly.
     - Under Chunk 1 you should now see a 'Shapes' folder with 'Layer' in it (probably '1 polygon')
     - Click on the 'Ortho' tab of your processing space. You should see a white boundary
     - Click this white boundary; it should turn red-ish.
