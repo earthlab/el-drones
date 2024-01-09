@@ -9,6 +9,7 @@ This document is a working guide for post-processing UAS field missions for fore
    - To open metashape on  CURC, open a terminal and type the following code lines:
         - source ~/.metashape
         - metashape
+    - When saving your file, keep the file naming structure as the plot or transect directory you are working in and add _METASHAPE to the end. If you are processing for Macrosystems, add either M300_METASHAPE or MINI2_METASHAPE to the end.
 4. Set preferences (MetashapePro -> preferences)  
     - -> GPU-> Check box for GPU if there is one available, check box for Use CPU when performing…)  
 5. Import photos (Workflow menu in top toolbar -> add photos (or folder--adding the entire folder is often easiest))   
