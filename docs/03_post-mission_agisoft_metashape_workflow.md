@@ -5,34 +5,37 @@ This document is a working guide for post-processing UAS field missions for fore
    echo "umask 0000" >> ~/.metashape
    
    This will ensure that all of your Metashape files and directories have open permissions (the default settings are a pain)
-2. Open Metashape and save project in a sensible place (File -> save)  
-3. Set preferences (MetashapePro -> preferences)  
+2. Open Metashape and save project in a sensible place (File -> save)
+   - To open metashape on  CURC, open a terminal and type the following code lines:
+        - source ~/.metashape
+        - metashape
+4. Set preferences (MetashapePro -> preferences)  
     - -> GPU-> Check box for GPU if there is one available, check box for Use CPU when performing…)  
-4. Import photos (Workflow menu in top toolbar -> add photos (or folder--adding the entire folder is often easiest))   
+5. Import photos (Workflow menu in top toolbar -> add photos (or folder--adding the entire folder is often easiest))   
     - Select single (e.g., Phantom4Pro camera) or multi-camera system (e.g., Kernel camera (Micasense))
     - - When uploading a folder of images for a multi-camera system, will need to select “Multi-camera system: arrange images based on meta data.” It is okay to have subfolders included in the folder (i.e. adding a folder with subfolders of "Camera1" and "Camera2" will add all photos from both subfolders).
-    - Import all photos, including reflectance cal target photos (have to repeat this if images are in separate folders)  
-    - Note: Cal photos need to go in a separate folder for calibration images in the Workspace pane. They are often automatically detected at import (if noted in metadata), automatically detected at the next step, or manually moved later. 
-5. Clean up photos 
+    - Import all photos, including reflectance cal target photos (if you have them, i.e. for MicaSense camera) (have to repeat this if images are in separate folders)  
+    - Note: Cal photos need to go in a separate folder for calibration images in the Workspace pane. They are often automatically detected at import (if noted in metadata), automatically detected at the next step, or manually moved later.
+6. Clean up photos 
     - Manually remove outlier photos (e.g.,  taken during take-off) in Model workspace
     - Check camera calibration (from EXIF files) (tools-> Camera calibration) exiftool  
-6. Convert GPS coordinates of your geotagged images to match the coordinate system of your ground control points (GCPs) which will be imported later. Use the "convert" tab under the "Reference" panel and select the coordinate system from the "coordinate System" under "Convert Reference" dialog box. Verify coordinate system of imagery by clicking on chunk in Workspace pane and looking in bottom left corner.
+7. Convert GPS coordinates of your geotagged images to match the coordinate system of your ground control points (GCPs) which will be imported later. Use the "convert" tab under the "Reference" panel and select the coordinate system from the "coordinate System" under "Convert Reference" dialog box. Verify coordinate system of imagery by clicking on chunk in Workspace pane and looking in bottom left corner.
     - Phantom 4 imagery is in WGS84 (EPSG::4326) by default
     - Phantom 4 vertical height is notoriously imprecise. Use relative rather than absolute camera height. Follow instructions in [this link](https://agisoft.freshdesk.com/support/solutions/articles/31000152491-working-with-dji-photos-altitude-problem-) to use DJI relative height and then add take-off height.
     - See [this link](http://www.agisoft.com/forum/index.php?topic=4986.msg38769#msg38769) for trouble-shooting vertical height with a Phantom 4.  
-7. Estimate image quality  
+8. Estimate image quality  
     - In Photos workspace, change view to detailed > select all photos > right-click > Estimate Image Quality... 
     - Disable all images that have an image quality below 0.7  
-8. If reflectance panel (e.g. with Micasense camera) -> Run reflectance calibration  
+9. If reflectance panel (e.g. with Micasense camera) -> Run reflectance calibration  
     - Tools-> Calibrate reflectance-> Locate panels  
     - Input calibration data for panel as a CSV, or manually  
     - Check on “Use reflectance panels” and “Use sun sensor” (if had a sun sensor & using data) options in the Calibrate Reflectance dialog to perform calibration based on panel data and/or image meta information. Click OK to start the calibration process  
     - Please refer [this page](https://support.micasense.com/hc/en-us/articles/115000765514-Use-of-Calibrated-Reflectance-Panels-For-MicaSense-Data) for more information on calibration panel and [this page](https://agisoft.freshdesk.com/support/solutions/articles/31000148780-micasense-rededge-mx-processing-workflow-including-reflectance-calibration-in-agisoft-metashape-pro#Appendix-C.-Controlling-reflectance-calculation) for calibration process.
-9. Generate masks if necesary (for example, if you don't want to include cars or other moving objects)
-10. Align photos (workflow->) same as generating sparse point cloud  
+10. Generate masks if necesary (for example, if you don't want to include cars or other moving objects)
+11. Align photos (workflow->) same as generating sparse point cloud  
     - High accuracy, generic preselection, reference preselection, key and tie point limits to default (40,000 and 4,000 respectively) Adaptive model fitting – yes Apply masks if using a mask  
     - Can experiment the best key and tie point limits for the project. Some projects use (40,000 and 10,000 respectively) or (40,000 and no value for tie point limit (aka unlimited) respectively)
-11. GCPs  
+12. GCPs  (if your flight was performed with GCPs)
     - Add Markers (3rd icon from left in Workspace toolbar, 1st icon from left in Reference toolbar)  
     - Specify accuracy for markers
     - Delimiter: Comma so that csv cells would go into correct columns  
@@ -45,31 +48,32 @@ This document is a working guide for post-processing UAS field missions for fore
         - Do for all GCPs (or 4-5 at least)  
     - Update  
         - Agisoft’s description through correspondence (AIS): Update - after adjusting marker locations on the photos, you recalculate the coordinates and calculate errors given the position of the GCP.  (Reference pane, sixth button in from the left, 'Update Transform')
-12. Assuming that you have a sufficient number (~8 or more)  of high accuracy ground control points, uncheck all images in the reference pane and also uncheck a few GCPs (20 to 30%) in order to use them as check points instead of control points. This will give you a better measure of the 'real accuracy' of your dataset. Note that the layout/distribution of GCPs is very important. If you have been able to correct the EXIF altitude information for all your cameras, then you do not have to uncheck the cameras in the reference pane. They can be used as reference as long as the right camera accuracy settings (leave default 10m) have been chosen.
-13. Clean sparse point cloud (Model > GRADUAL SELECTION). Remove all points with high reprojection error (choose a value below 1, suggest using 0.5-0.8 ) and high reconstruction uncertainty (try to find the 'natural threshold' by moving the slider).
-14. Adjust bounding box
-15. Optimize Cameras (tools ->) to improve alignment accuracy  
+13. Assuming that you have a sufficient number (~8 or more)  of high accuracy ground control points, uncheck all images in the reference pane and also uncheck a few GCPs (20 to 30%) in order to use them as check points instead of control points. This will give you a better measure of the 'real accuracy' of your dataset. Note that the layout/distribution of GCPs is very important. If you have been able to correct the EXIF altitude information for all your cameras, then you do not have to uncheck the cameras in the reference pane. They can be used as reference as long as the right camera accuracy settings (leave default 10m) have been chosen.
+14. Clean sparse point cloud (Model > GRADUAL SELECTION). Remove all points with high reprojection error (choose a value below 1, suggest using 0.5-0.8 ) and high reconstruction uncertainty (try to find the 'natural threshold' by moving the slider).
+15. Adjust bounding box
+16. Optimize Cameras (tools ->) to improve alignment accuracy  
     - Check all but bottom left one (Fit k4) when using DJI imagery. Don’t check advanced (Adaptive camera model fitting and est tie point covariance)  
     - Agisoft’s description of through correspondence (AIS): Optimize cameras - you refine the camera calibration parameter values based on the calculated values after the images are aligned.    
-16. Build Dense point cloud (workflow ->)    
-    - High or Medium quality (higher quality more accurate but increase processing time), aggressive depth filtering, check box for calculate point colors)  
+17. Build Dense point cloud (workflow ->)    
+    - High or Medium quality (higher quality more accurate but increase processing time), aggressive depth filtering, check box for calculate point colors)
+         - (Ideally High unless major processing bottleneck)
     - If depth maps already exist, you can reuse these maps in the dense point cloud generation by selecting “Reuse depth maps” in the dense point cloud build window.  
-17. Build mesh (not needed if you just want a DEM and/or orthophotograph)  
-18. Build texture (not needed if you just want a DEM and/or orthophotograph)  
-19. Build DEM from dense cloud (workflow ->)   
+18. Build mesh (not needed if you just want a DEM and/or orthophotograph)  
+19. Build texture (not needed if you just want a DEM and/or orthophotograph)  
+20. Build DEM from dense cloud (workflow ->)   
     - For orthomosaic generation – faster than mesh (but mesh may be required for complex terrain)  
     - Geographic type, check that it’s correct projection  
     - Source data: dense cloud  
     - Interpolation: Extrapolated (interpolation – enabled would leave elevation values only for areas seen by a camera)  
     - Check resolution  
-20. Build orthomosaic based on DEM (workflow ->)
+21. Build orthomosaic based on DEM (workflow ->)
     - DEM surface
     - Select if you want blending, otherwise Mosaic (default)
     - Enable hole filling
     - Check pixel size (can check meters button)
-21.	If calculating indices -> Calculate required index information
+22.	If calculating indices -> Calculate required index information
     - Tools-> set raster transformation-> transform tab
-22. Create a Digital Terrain Model (DTM)
+23. Create a Digital Terrain Model (DTM)
     - First, create a copy of your chunk (Metashape only allows one file of each type per chunk, meaning that the DEMs will overwrite one another if this process is all done in a single chunk)
           - In your workspace, right click on 'Chunk 1' and then 'Duplicate...'
           - De-select everything exept for 'Dense Clouds' and then complete the process
@@ -90,7 +94,7 @@ This document is a working guide for post-processing UAS field missions for fore
         - Click 'Ok' - the DEM will process, which may take a moment
         - You should now have a DEM under 'DTM Chunk'
         - Right click on the new DEM and rename it to 'DTM'
-23. Create a canopy height model from the original DEM and the DTM
+24. Create a canopy height model from the original DEM and the DTM
     - Activate 'Chunk 1' again
     - In the menu, go to "Tools" and then under "DEM" select 'Transform DEM..."
         - Click 'Calculate difference'
@@ -110,7 +114,9 @@ This document is a working guide for post-processing UAS field missions for fore
     - Your exports of all DEM and ortho layers should export as clipped by this boundary; when you export something, you can select/de-select 'Clip to boundary shapes'
 27.	Export results to the 'Outputs' folder for your project
     - Make Chunk 1 active
-        - Right click on the Dense Cloud and 'Export Dense Cloud...' Export the points with the appropriate name and then '_POINTCLOUD'
+        - Right click on the Dense Cloud and 'Export Dense Cloud...' Export the points with the appropriate name and then '_POINTCLOUD'. The filetype will be .laz (the default)
+             - If you are exporting a large point clouds (i.e. CAREER project transects), these will need to be tiled. In the dense cloud export dialogue (after you choose your file name), check the box next to "Split in blocks (m):" and then put in your block size. For CAREER processing, use 100x100m.
+             - You can also clip to boundary shapes, just as with any .tif file
         - Right click on the DEM and 'Export DEM...' Export the DEM with the appropriate name and then '_DEM'. If you have a shapefile boundary loaded up (see above), make sure that you have 'Clip to boundary shapes' selected.
         - Right click on the orthomosaic and 'Export Orthomosaic...' Export the orthomosaic with the appropriate name and then '_ORTHO'. If you have a shapefile boundary loaded up (see above), make sure that you have 'Clip to boundary shapes' selected.
         - Right click on the Canopy Height layer and 'Export DEM...' Export the Canopy Height with the appropriate name and then "_CANOPYHEIGHT". If you have a shapefile boundary loaded up (see above), make sure that you have 'Clip to boundary shapes' selected.
