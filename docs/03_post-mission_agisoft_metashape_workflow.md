@@ -36,9 +36,11 @@ This document is a working guide for post-processing UAS field missions for fore
     - If you need to find the calibration panel manually, it is here: /pl/active/earthlab/macrosystem/UAS/PanelCalibration/RP06-2104096-OB.csv
 11. Generate masks if necesary (for example, if you don't want to include cars or other moving objects. Should not be necessary for Macrosystems & CAREER)
 12. Align photos (workflow->) same as generating sparse point cloud  
-    - High accuracy, generic preselection, reference preselection, key and tie point limits to default (40,000 and 4,000 respectively) Adaptive model fitting – yes Apply masks if using a mask  
+    - High accuracy, generic preselection, reference preselection, key and tie point limits to default (40,000 and 4,000 respectively)
+    - Under advanced, check Adaptive model fitting
+    - Apply masks if using a mask  
     - Can experiment the best key and tie point limits for the project. Some projects use (40,000 and 10,000 respectively) or (40,000 and no value for tie point limit (aka unlimited) respectively)
-    - Macrosystems uses 40,000 & 4,000)
+    - Macrosystems uses 40,000 & 4,000 for key and tie point limits
 13. GCPs  (if your flight was performed with GCPs)
     - Add Markers (3rd icon from left in Workspace toolbar, 1st icon from left in Reference toolbar)  
     - Specify accuracy for markers
